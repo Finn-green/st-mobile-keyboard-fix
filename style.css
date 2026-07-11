@@ -1,46 +1,40 @@
-/* 锁定视口，防止位移 */
-html, body {
+/* 使用 html 开头增加权重 */
+html, 
+html body {
     height: 100% !important;
     width: 100% !important;
     overflow: hidden !important;
     overflow: clip !important;
     overscroll-behavior: none !important;
-    margin: 0 !important;
-    padding: 0 !important;
-}
-
-/* 主容器固定 */
-#page, .layout-container, #content_container {
-    position: absolute !important;
+    position: fixed !important; /* 强制物理锁定 */
     top: 0 !important;
     left: 0 !important;
-    width: 100% !important;
-    height: 100% !important;
-    overflow: hidden !important;
 }
 
-/* 底栏随键盘高度自动起跳 */
-#send_form {
+/* 强制底栏位置，防止被插件或主题的 absolute 覆盖 */
+html body #send_form {
     bottom: env(keyboard-inset-height, 0px) !important;
     position: fixed !important;
     left: 0 !important;
     right: 0 !important;
+    width: 100vw !important;
     transition: bottom 0.05s linear !important;
-    z-index: 5000 !important;
+    z-index: 99999 !important;
     background: transparent !important;
 }
 
-/* 内部元素重置，防止飞起 */
-#nonQRFormItems, #send_textarea, #form_shield, #shield {
+/* 确保聊天区域不被遮挡 */
+html body #chat {
+    height: 100vh !important;
+    padding-bottom: calc(180px + env(keyboard-inset-height, 0px)) !important;
+    overflow-y: auto !important;
+    -webkit-overflow-scrolling: touch !important;
+}
+
+/* 重置内部文本域位置 */
+#send_textarea, 
+#nonQRFormItems {
     bottom: 0 !important;
     position: relative !important;
     transform: none !important;
-}
-
-/* 聊天内容区避让 */
-#chat {
-    height: 100% !important;
-    padding-bottom: calc(160px + env(keyboard-inset-height, 0px)) !important;
-    overflow-y: auto !important;
-    -webkit-overflow-scrolling: touch;
 }
