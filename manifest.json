@@ -1,0 +1,9 @@
+{
+    "name": "输入优化",
+    "id": "st-mobile-keyboard-fix",
+    "description": "优化移动端点击输入框的卡顿感",
+    "version": "1.0.0",
+    "author": "User",
+    "entryPoint": "index.js",
+    "styles": ["style.css"]
+}
